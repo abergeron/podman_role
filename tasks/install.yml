@@ -1,0 +1,23 @@
+---
+- name: Install dependecies
+  ansible.builtin.apt:
+    pkg:
+      - crun
+      - iptables
+      - libassuan0
+      - libc6
+      - libdevmapper1.02.1
+      - libglib2.0-0
+      - libgpgme11
+      - libgpg-error0
+      - libprotobuf23
+      - libprotobuf-c1
+      - libsystemd0
+      - containernetworking-plugins
+      - conmon
+      - uidmap
+
+- name: Unpack archive
+  ansible.builtin.unarchive:
+    src: "archives/podman-{{ podman_version }}-{{ ansible_distribution }}{{ ansible_distribution_version }}.tgz"
+    dest: /

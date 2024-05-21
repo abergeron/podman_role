@@ -1,0 +1,9 @@
+---
+podman_version: "5.0.2"
+
+# This directory needs to be writable by podman_build_user
+podman_build_dir: "/tmp"
+podman_build_user: "{{ remote_user }}"
+
+# This is the final install location, not the location for the archive
+podman_install_prefix: "/usr"
