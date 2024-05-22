@@ -7,3 +7,6 @@ podman_build_user: "{{ remote_user }}"
 
 # This is the final install location, not the location for the archive
 podman_install_prefix: "/usr"
+
+podman_storage: "/var/lib/containers"
+podman_storage_rootless: "${XDG_CONFIG_HOME}/containers"

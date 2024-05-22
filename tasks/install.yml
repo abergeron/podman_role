@@ -21,3 +21,19 @@
   ansible.builtin.unarchive:
     src: "archives/podman-{{ podman_version }}-{{ ansible_distribution }}{{ ansible_distribution_version }}.tgz"
     dest: /
+
+- name: Install containers.conf
+  ansible.builtin.template:
+    src: templates/containers.conf.j2
+    dest: /etc/containers/containers.conf
+    mode: 0644
+    owner: root
+    group: root
+
+- name: Install storage.conf
+  ansible.builtin.template:
+    src: templates/storage.conf.j2
+    dest: /etc/containers/storage.conf
+    mode: 0644
+    owner: root
+    group: root
