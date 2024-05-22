@@ -1,10 +1,7 @@
 galaxy_info:
-  author: Arnaud Bergeron
-  description: Role to build and install recent podman on Ubuntu
-
-  # If the issue tracker for your role is not on github, uncomment the
-  # next line and provide a value
-  # issue_tracker_url: http://example.com/issue/tracker
+  role_name: podman
+  author: abergeron
+  description: Role to build and install recent podman on Ubuntu 22.04
 
   license: MIT
 
