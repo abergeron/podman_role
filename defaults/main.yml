@@ -1,5 +1,6 @@
 ---
 podman_version: "5.0.2"
+podman_build_rev: ""
 
 # This directory needs to be writable by podman_build_user
 podman_build_dir: "/tmp"

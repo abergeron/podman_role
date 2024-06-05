@@ -27,16 +27,22 @@
       - uidmap
       - make
 
+- name: Set dir paths
+  ansible.builtin.set_fact:
+    source_dir: "{{ podman_build_dir }}"/src
+    package_version: "{{ podman_version }}{{ '-' + podman_build_rev if podman_build_rev != '' else '' }}"
+    target_dir: "{{ podman_build_dir }}/podman_{{ package_version }}"
+
 - name: Make source dir
   ansible.builtin.file:
-    path: "{{ podman_build_dir }}"/src
+    path: "{{ source_dir }}"
     state: directory
     mode: 0755
     owner: "{{ podman_build_user }}"
 
 - name: Make target dir
   ansible.builtin.file:
-    path: "{{ podman_build_dir }}"/target
+    path: "{{ target_dir }}"
     state: directory
     mode: 0755
     owner: "{{ podman_build_user }}"
@@ -45,12 +51,12 @@
   ansible.builtin.git:
     repo: 'https://github.com/containers/podman.git'
     version: 'v{{ podman_source_version }}'
-    dest: "{{ podman_build_dir }}"/src/podman
+    dest: "{{ source_dir }}"/podman
     depth: 1
 
 - name: Run make
   community.general.make:
-    chdir: "{{ podman_build_dir }}"/src/podman
+    chdir: "{{ source_dir }}"/podman
     params:
       BUILDTAGS: "systemd exclude_graphdriver_btrfs"
       PREFIX: "{{ podman_install_prefix }}"
@@ -62,17 +68,26 @@
     chdir: "{{ podman_build_dir }}"/src/podman
     target: install
     params:
-      PREFIX: "{{ podman_build_dir }}"/target
+      PREFIX: "{{ target_dir }}"
     environment:
       PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/go-1.21/bin"
 
-- name: Prepare archive
-  community.general.archive:
-    path: "{{ podman_build_dir }}"/target
-    dest: "{{ podman_build_dir }}/target/podman-{{ podman_version }}-{{ ansible_distribution }}{{ ansible_distribution_version }}.tgz"
+- name: Create control file
+  ansible.builtin.template:
+    src: templates/control.j2
+    dest: "{{ target_dir }}"/DEBIAN/control
+    mode : 0644
 
-- name: Fetch archive
+- name: Build the package
+  ansible.builtin.command:
+    argv:
+      - dpkg-deb
+      - --build
+      - "podman-{{ package_version }}"
+    chdir: "{{ podman_build_dir }}"
+
+- name: Fetch package
   ansible.builtin.fetch:
-    src: "/target/podman-{{ podman_version }}-{{ ansible_distribution }}{{ ansible_distribution_version }}.tgz"
-    dest: archives/
+    src: "{{ podman_build_dir }}/podman-{{ package_version }}.deb"
+    dest: packages/
     flat: yes
