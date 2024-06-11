@@ -1,5 +1,4 @@
 Package: podman
-# make sure the package version matches what is in the Dockerfile
 Version: 5.0.2
 Section: base
 Priority: optional

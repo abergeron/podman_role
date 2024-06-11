@@ -1,4 +1,4 @@
-FROM: ubuntu:22.04
+FROM ubuntu:22.04
 # Make sure this matches with the version in files/control
 ARG PODMAN_VERSION=5.0.2
 ARG BUILD_REV=
@@ -17,7 +17,7 @@ RUN mkdir -p ${SOURCE_DIR}
 RUN mkdir -p ${TARGET_DIR}
 RUN mkdir -p /output
 
-RUN git clone --depth 1 https://github.com/containers/podman.git -b v{PODMAN_VERSION} ${SOURCE_DIR}/podman
+RUN git clone --depth 1 https://github.com/containers/podman.git -b v${PODMAN_VERSION} ${SOURCE_DIR}/podman
 
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/go-1.21/bin
 
@@ -25,4 +25,4 @@ RUN cd ${SOURCE_DIR}/podman && make -j4 BUILDTAGS="systemd exclude_graphdriver_b
 
 COPY files/control ${TARGET_DIR}/DEBIAN/control
 
-RUN cd /tmp dpkg-deb --build podman-${PACKAGE_VERSION}
+RUN cd /tmp && dpkg-deb --build podman-${PACKAGE_VERSION}

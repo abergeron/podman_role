@@ -15,10 +15,10 @@ jobs:
           run: mkdir output
 
         - name: Run dockerfile
-          run: docker build -t podman-build Dockerfile
+          run: docker build -t podman-build -f Dockerfile .
 
         - name: Extract .deb
-          run: docker run --rm --mount type=bind,src=output,dst=/output podman-build cp /tmp/podman-*.deb /output
+          run: docker run --rm --mount type=bind,src=$(pwd)/output,dst=/output podman-build bash -c "cp /tmp/podman-*.deb /output"
 
         - name: Upload package
           uses: svenstaro/upload-release-action@v2
