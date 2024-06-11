@@ -7,6 +7,9 @@ on:
 jobs:
     build:
       runs-on: ubuntu-22.04
+      permissions:
+        # to be allowed to crrate releases
+        contents: write
       steps:
         - name: Checkout
           uses: actions/checkout@v4
