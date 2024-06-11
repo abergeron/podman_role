@@ -1,8 +1,9 @@
 Package: podman
-Version: {{ package_version }}
+# make sure the package version matches what is in the Dockerfile
+Version: 5.0.2
 Section: base
 Priority: optional
 Architecture: amd64
 Depends: crun, iptables, libassuan0, libc6, libdevmapper1.02.1, libglib2.0-0, libgpgme11, libgpg-error0, libprotobuf23, libprotobuf-c1, libsystem0, containernerworking-plugins, conmon, uidmap
-Maintainer: {{ podman_package_maintainer | mandatory }}
+Maintainer: abergeron <abergeron@gmail.com>
 Description: Recent podman build for Ubuntu 22.04

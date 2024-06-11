@@ -1,0 +1,29 @@
+name: Build .deb for release
+on:
+  push:
+    tags:
+      - '**'
+
+jobs:
+    build:
+      runs-on: ubuntu-22.04
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+
+        - name: Make output dir
+          run: mkdir output
+
+        - name: Run dockerfile
+          run: docker build -t podman-build Dockerfile
+
+        - name: Extract .deb
+          run: docker run --rm --mount type=bind,src=output,dst=/output podman-build cp /tmp/podman-*.deb /output
+
+        - name: Upload package
+          uses: svenstaro/upload-release-action@v2
+          with:
+            file: output/podman-*.deb
+            file_glob: true
+            tag: ${{ github.ref }}
+            
