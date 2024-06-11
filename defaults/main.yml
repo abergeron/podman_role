@@ -1,5 +1,6 @@
 ---
-podman_package_url: https://github.com/abergeron/podman_role/releases/latest/download/podman-5.0.2-1.deb
+netavark_package_url: https://github.com/abergeron/podman_role/releases/latest/download/netavark-1.11.0.deb
+podman_package_url: https://github.com/abergeron/podman_role/releases/latest/download/podman-5.1.1.deb
 
 podman_storage: "/var/lib/containers"
 podman_storage_rootless: "${XDG_CONFIG_HOME}/containers"
