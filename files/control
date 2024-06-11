@@ -1,8 +1,8 @@
 Package: podman
-Version: 5.0.2
+Version: 5.0.2-1
 Section: base
 Priority: optional
 Architecture: amd64
-Depends: crun, iptables, libassuan0, libc6, libdevmapper1.02.1, libglib2.0-0, libgpgme11, libgpg-error0, libprotobuf23, libprotobuf-c1, libsystem0, containernerworking-plugins, conmon, uidmap
+Depends: crun, iptables, libassuan0, libc6, libdevmapper1.02.1, libglib2.0-0, libgpgme11, libgpg-error0, libprotobuf23, libprotobuf-c1, libsystemd0, containernetworking-plugins, conmon, uidmap
 Maintainer: abergeron <abergeron@gmail.com>
 Description: Recent podman build for Ubuntu 22.04

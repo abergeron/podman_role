@@ -1,7 +1,7 @@
 FROM ubuntu:22.04
 # Make sure this matches with the version in files/control
 ARG PODMAN_VERSION=5.0.2
-ARG BUILD_REV=
+ARG BUILD_REV="-1"
 
 RUN apt-get update -y && \
     apt-get install -y crun git golang-1.21-go go-md2man iptables \
