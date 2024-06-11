@@ -1,13 +1,5 @@
 ---
-podman_version: "5.0.2"
-podman_build_rev: ""
-
-# This directory needs to be writable by podman_build_user
-podman_build_dir: "/tmp"
-podman_build_user: "{{ remote_user }}"
-
-# This is the final install location, not the location for the archive
-podman_install_prefix: "/usr"
+podman_package_url: https://github.com/abergeron/podman_role/releases/latest/download/podman-5.0.2.deb
 
 podman_storage: "/var/lib/containers"
 podman_storage_rootless: "${XDG_CONFIG_HOME}/containers"

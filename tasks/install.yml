@@ -1,0 +1,8 @@
+---
+
+- name: Install package
+  ansible.builtin.apt:
+    deb: {{ podman_package_url }}
+
+- name: Configure
+  ansible.builtin.import_tasks: configure.yml
