@@ -7,7 +7,7 @@ ARG NETAVARK_VERSION=1.11.0
 ARG NETAVARK_BUILD_REV=
 
 RUN apt-get update -y && \
-    apt-get install -y crun git golang-1.21-go go-md2man iptables \
+    apt-get install -y git wget golang-1.21-go go-md2man iptables \
     libassuan-dev libc6-dev libdevmapper-dev libglib2.0-dev libgpgme-dev \
     libgpg-error-dev libprotobuf-dev libprotobuf-c-dev libsystemd-dev \
     pkg-config conmon uidmap make cargo protobuf-compiler \
@@ -29,6 +29,9 @@ RUN git clone --depth 1 https://github.com/containers/podman.git -b v${PODMAN_VE
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/go-1.21/bin
 
 RUN cd ${SOURCE_DIR}/podman && make -j4 BUILDTAGS="seccomp systemd exclude_graphdriver_btrfs" PREFIX=/usr && make install PREFIX=/usr DESTDIR=${PODMAN_TARGET_DIR}
+
+RUN wget "https://github.com/containers/crun/releases/download/1.15/crun-1.15-linux-amd64" -O ${PODMAN_TARGET_DIR}/usr/bin/crun
+RUN chmod 755 ${PODMAN_TARGET_DIR}/usr/bin/crun
 
 COPY files/control-podman ${PODMAN_TARGET_DIR}/DEBIAN/control
 
