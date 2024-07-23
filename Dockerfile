@@ -1,7 +1,7 @@
 FROM ubuntu:22.04
 
 # Make sure this matches with the versions in files/control-*
-ARG PODMAN_VERSION=5.1.1
+ARG PODMAN_VERSION=5.1.2
 ARG PODMAN_BUILD_REV=
 ARG NETAVARK_VERSION=1.11.0
 ARG NETAVARK_BUILD_REV=
@@ -10,7 +10,8 @@ RUN apt-get update -y && \
     apt-get install -y crun git golang-1.21-go go-md2man iptables \
     libassuan-dev libc6-dev libdevmapper-dev libglib2.0-dev libgpgme-dev \
     libgpg-error-dev libprotobuf-dev libprotobuf-c-dev libsystemd-dev \
-    pkg-config conmon uidmap make cargo protobuf-compiler
+    pkg-config conmon uidmap make cargo protobuf-compiler \
+    libseccomp-dev
 
 ENV SOURCE_DIR=/tmp/src
 ENV PODMAN_PACKAGE_VERSION=${PODMAN_VERSION}${PODMAN_BUILD_REV}
@@ -27,7 +28,7 @@ RUN git clone --depth 1 https://github.com/containers/podman.git -b v${PODMAN_VE
 
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/go-1.21/bin
 
-RUN cd ${SOURCE_DIR}/podman && make -j4 BUILDTAGS="systemd exclude_graphdriver_btrfs" PREFIX=/usr && make install PREFIX=/usr DESTDIR=${PODMAN_TARGET_DIR}
+RUN cd ${SOURCE_DIR}/podman && make -j4 BUILDTAGS="seccomp systemd exclude_graphdriver_btrfs" PREFIX=/usr && make install PREFIX=/usr DESTDIR=${PODMAN_TARGET_DIR}
 
 COPY files/control-podman ${PODMAN_TARGET_DIR}/DEBIAN/control
 
