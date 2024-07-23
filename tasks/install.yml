@@ -2,11 +2,11 @@
 
 - name: Install netavark
   ansible.builtin.apt:
-    deb: {{ netavark_package_url }}
+    deb: "{{ netavark_package_url }}"
 
 - name: Install podman
   ansible.builtin.apt:
-    deb: {{ podman_package_url }}
+    deb: "{{ podman_package_url }}"
 
 - name: Configure
   ansible.builtin.import_tasks: configure.yml
