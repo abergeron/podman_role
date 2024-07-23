@@ -22,3 +22,19 @@
     mode: 0644
     owner: root
     group: root
+
+- name: Install registries.conf
+  ansible.builtin.template:
+    src: templates/registries.conf.j2
+    dest: /etc/containers/registries.conf
+    mode: 0644
+    owner: root
+    group: root
+
+- name: Install policy.json
+  ansible.builtin.copy:
+    src: files/policy.json
+    dest: /etc/containers/policy.json
+    owner: root
+    group: root
+    mode: 0644
