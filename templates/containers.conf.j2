@@ -1,9 +1,6 @@
-[containers]
-apparmor_profile = "unconfined"
-label = false
-cgroupns = "host"
-cgroups = "enabled"
-ipcns = "host"
-netns = "host"
-utsns = "host"
-no_hosts = true
+{% for section in podman_containers_conf.items() %}
+[{{ section.0 }}]
+{% for item in section.1.items() %}
+{{ item.0 }} = {{ item.1 }}
+{% endfor %}
+{% endfor %}

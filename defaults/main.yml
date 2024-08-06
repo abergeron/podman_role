@@ -2,7 +2,25 @@
 netavark_package_url: https://github.com/abergeron/podman_role/releases/latest/download/netavark-1.11.0.deb
 podman_package_url: https://github.com/abergeron/podman_role/releases/latest/download/podman-5.1.2.deb
 
-podman_storage: "/var/lib/containers"
 podman_storage_rootless: "${XDG_CONFIG_HOME}/containers"
 
 podman_search_path: '["docker.io"]'
+
+podman_containers_conf:
+  - "containers":
+    apparmor_profile: '"unconfined"'
+    label: "false"
+    cgroupns: '"host"'
+    cgroups: '"enabled"'
+    ipcns: '"host"'
+    netns: '"host"'
+    utsns: '"host"'
+    no_hosts: "true"
+
+  - "engine":
+    cgroup_manager: '"cgroupfs"'
+
+podman_storage_conf:
+  - "storage":
+      driver: '"overlay"'
+      rootless_storage_path: '"{{ podman_storage_rootless }}"'
