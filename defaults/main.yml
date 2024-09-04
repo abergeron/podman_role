@@ -9,7 +9,7 @@ podman_storage_rootless: "${XDG_CONFIG_HOME}/containers"
 podman_search_path: '["docker.io"]'
 
 podman_containers_conf:
-  - "containers":
+  containers:
     apparmor_profile: '"unconfined"'
     label: "false"
     cgroupns: '"host"'
@@ -19,10 +19,10 @@ podman_containers_conf:
     utsns: '"host"'
     no_hosts: "true"
 
-  - "engine":
+  engine:
     cgroup_manager: '"cgroupfs"'
 
 podman_storage_conf:
-  - "storage":
-      driver: '"overlay"'
-      rootless_storage_path: '"{{ podman_storage_rootless }}"'
+  storage:
+    driver: '"overlay"'
+    rootless_storage_path: '"{{ podman_storage_rootless }}"'
