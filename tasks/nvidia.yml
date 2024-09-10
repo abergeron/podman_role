@@ -1,0 +1,16 @@
+---
+- name: Get nvidia key
+  ansible.builtin.get_url:
+    url: https://nvidia.github.io/libnvidia-container/gpgkey
+    dest: /usr/share/keyrings/nvidia-container-toolkit-keyring.asc
+    mode: "0644"
+
+- name: Setup nvidia repos
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64 signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.asc] https://nvidia.github.io/libnvidia-container/stable/deb/$(ARCH) /"
+    state: present
+
+- name: Install nvidia container support
+  ansible.builtin.apt:
+    name: nvidia-container-toolkit
+    state: present

@@ -3,6 +3,7 @@ netavark_package_url: https://github.com/abergeron/podman_role/releases/latest/d
 podman_package_url: https://github.com/abergeron/podman_role/releases/latest/download/podman-5.1.2.deb
 
 podman_do_install: true
+podman_setup_nvidia: false
 
 podman_storage_rootless: "${XDG_CONFIG_HOME}/containers"
 

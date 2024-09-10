@@ -5,3 +5,7 @@
 
 - name: Configure
   ansible.builtin.include_tasks: configure.yml
+
+- name: Setup nvidia gpus
+  ansible.builtin.include_tasks: nvidia.yml
+  when: podman_setup_nvidia
