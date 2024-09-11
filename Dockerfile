@@ -1,9 +1,9 @@
 FROM ubuntu:22.04
 
 # Make sure this matches with the versions in files/control-*
-ARG PODMAN_VERSION=5.1.2
+ARG PODMAN_VERSION=5.2.2
 ARG PODMAN_BUILD_REV=
-ARG NETAVARK_VERSION=1.11.0
+ARG NETAVARK_VERSION=1.12.2
 ARG NETAVARK_BUILD_REV=
 
 RUN apt-get update -y && \
