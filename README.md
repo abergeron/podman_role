@@ -38,8 +38,7 @@ running as root
 containers when running rootless. This can include shell variables
 such as ${HOME} to have an easy per-user location.
 
-`podman_do_install`: set to `false` to skip the package install step, if
-you have an alternate way to do this.
+`podman_install_from_repo`: set to `true` to assume there is a repo configured with the podman packages.
 
 `podman_setup_nvidia`: set to `true` to install nvidia-container-toolkit for nvidia gpu support. You will still have to generate the CDI file: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/cdi-support.html#generating-a-cdi-specification
 

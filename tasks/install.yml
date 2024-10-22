@@ -3,7 +3,17 @@
 - name: Install netavark
   ansible.builtin.apt:
     deb: "{{ netavark_package_url }}"
+  when: podman_install_from_repo is false
 
 - name: Install podman
   ansible.builtin.apt:
     deb: "{{ podman_package_url }}"
+  when: podman_install_from_repo is false
+
+- name: Install packages
+  ansible.builtin.apt:
+    name:
+      - "podman>=5.1.0"
+      - "netavark>=1.11"
+    state: present
+  when: podman_install_from_repo
