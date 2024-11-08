@@ -1,5 +1,5 @@
 Package: podman
-Version: 5.1.2
+Version: ${PODMAN_VERSION}${PODMAN_BUILD_REV}
 Section: base
 Priority: optional
 Architecture: amd64

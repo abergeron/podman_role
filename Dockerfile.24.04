@@ -1,7 +1,8 @@
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 # Make sure this matches with the versions in files/control-*
 ARG PODMAN_VERSION=5.2.4
+ARG CRUN_VERSION=1.18.2
 ARG PODMAN_BUILD_REV=
 ARG NETAVARK_VERSION=1.12.2
 ARG NETAVARK_BUILD_REV=
@@ -30,10 +31,10 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
 
 RUN cd ${SOURCE_DIR}/podman && make -j4 BUILDTAGS="seccomp systemd exclude_graphdriver_btrfs" PREFIX=/usr && make install PREFIX=/usr DESTDIR=${PODMAN_TARGET_DIR}
 
-RUN wget "https://github.com/containers/crun/releases/download/1.15/crun-1.15-linux-amd64" -O ${PODMAN_TARGET_DIR}/usr/bin/crun
+RUN wget "https://github.com/containers/crun/releases/download/${CRUN_VERSION}/crun-${CRUN_VERSION}-linux-amd64" -O ${PODMAN_TARGET_DIR}/usr/bin/crun
 RUN chmod 755 ${PODMAN_TARGET_DIR}/usr/bin/crun
 
-COPY files/control-podman ${PODMAN_TARGET_DIR}/DEBIAN/control
+COPY files/control-podman.24.04 ${PODMAN_TARGET_DIR}/DEBIAN/control
 
 RUN cd /tmp && dpkg-deb --build podman-${PODMAN_PACKAGE_VERSION}
 
@@ -41,6 +42,6 @@ RUN git clone --depth 1 https://github.com/containers/netavark.git -b v${NETAVAR
 
 RUN cd ${SOURCE_DIR}/netavark && make PREFIX=/usr && make docs PREFIX=/usr && make install PREFIX=/usr DESTDIR=${NETAVARK_TARGET_DIR}
 
-COPY files/control-netavark ${NETAVARK_TARGET_DIR}/DEBIAN/control
+COPY files/control-netavark.24.04 ${NETAVARK_TARGET_DIR}/DEBIAN/control
 
 RUN cd /tmp && dpkg-deb --build netavark-${NETAVARK_PACKAGE_VERSION}

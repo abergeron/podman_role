@@ -1,0 +1,7 @@
+Package: netavark
+Version: ${NETAVARK_VERSION}${NETAVARK_BUILD_REV}
+Section: base
+Priority: optional
+Architecture: amd64
+Maintainer: abergeron <abergeron@gmail.com>
+Description: Netavark build for Ubuntu 22.04
