@@ -1,6 +1,0 @@
-{% for section in podman_storage_conf.items() %}
-[{{ section.0 }}]
-{% for item in section.1.items() %}
-{{ item.0 }} = {{ item.1 }}
-{% endfor %}
-{% endfor %}

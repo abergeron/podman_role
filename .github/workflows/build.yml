@@ -1,8 +1,8 @@
 name: Build .deb for release
 on:
   push:
-    tags:
-      - '**'
+    branches:
+      - 'build'
 
 jobs:
     build:
@@ -17,8 +17,14 @@ jobs:
         - name: Make output dir
           run: mkdir output
 
-        - name: Run dockerfile
-          run: docker build -t podman-build -f Dockerfile .
+        - name: Run 22.04 dockerfile
+          run: docker build -t podman-build -f Dockerfile.22.04 .
+
+        - name: Extract .deb
+          run: docker run --rm --mount type=bind,src=$(pwd)/output,dst=/output podman-build bash -c "cp /tmp/podman-*.deb /tmp/netavark-*.deb /output"
+
+        - name: Run 24.04 dockerfile
+          run: docker build -t podman-build -f Dockerfile.24.04 .
 
         - name: Extract .deb
           run: docker run --rm --mount type=bind,src=$(pwd)/output,dst=/output podman-build bash -c "cp /tmp/podman-*.deb /tmp/netavark-*.deb /output"
