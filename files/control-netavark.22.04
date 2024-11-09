@@ -1,5 +1,5 @@
 Package: netavark
-Version: ${NETAVARK_VERSION}${NETAVARK_BUILD_REV}
+Version: ${NETAVARK_PACKAGE_VERSION}
 Section: base
 Priority: optional
 Architecture: amd64

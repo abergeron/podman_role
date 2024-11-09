@@ -8,7 +8,7 @@ jobs:
     build:
       runs-on: ubuntu-22.04
       permissions:
-        # to be allowed to crrate releases
+        # to be allowed to create releases
         contents: write
       steps:
         - name: Checkout
@@ -17,17 +17,8 @@ jobs:
         - name: Make output dir
           run: mkdir output
 
-        - name: Run 22.04 dockerfile
-          run: docker build -t podman-build -f Dockerfile.22.04 .
-
-        - name: Extract .deb
-          run: docker run --rm --mount type=bind,src=$(pwd)/output,dst=/output podman-build bash -c "cp /tmp/podman-*.deb /tmp/netavark-*.deb /output"
-
-        - name: Run 24.04 dockerfile
-          run: docker build -t podman-build -f Dockerfile.24.04 .
-
-        - name: Extract .deb
-          run: docker run --rm --mount type=bind,src=$(pwd)/output,dst=/output podman-build bash -c "cp /tmp/podman-*.deb /tmp/netavark-*.deb /output"
+        - name: Run builds
+          run: sh build.sh
 
         - name: Upload netavark package
           uses: svenstaro/upload-release-action@v2
