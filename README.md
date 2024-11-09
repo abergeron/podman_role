@@ -1,4 +1,4 @@
-Role Name
+abergeron.podman
 =========
 
 Role to install podman for Ubuntu 22.04
@@ -28,11 +28,10 @@ Configuration variables
 
 All the variables are optional because they have reasonable defaults.
 
-`podman_pacakge_url`: By default this is the url of the latest build
+`podman_package_url`: The http location of a podman package file (default to the latest build)
 from the github actions in this repo.
 
-`podman_storage`: Location where podman will store containers when
-running as root
+`netavark_package_url`: The location of a netavark package file (defaults to the latest build).
 
 `podman_storage_rootless`: Locations where podman will store
 containers when running rootless. This can include shell variables
