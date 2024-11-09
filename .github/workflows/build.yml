@@ -1,8 +1,8 @@
 name: Build .deb for release
 on:
   push:
-    branches:
-      - 'build'
+    tags:
+      - 'build-*'
 
 jobs:
     build:
