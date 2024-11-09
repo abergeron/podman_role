@@ -28,10 +28,11 @@ Configuration variables
 
 All the variables are optional because they have reasonable defaults.
 
-`podman_package_url`: The http location of a podman package file (default to the latest build)
-from the github actions in this repo.
+`podman_package_url`: The http location of a podman package file (default to the latest build from the github actions in this repo).
 
-`netavark_package_url`: The location of a netavark package file (defaults to the latest build).
+`netavark_package_url`: The location of a netavark package file (defaults to the latest build from the github actions in this repo).
+
+`podman_install_from_repo`: If set to `true` it will attempt to install podman from already-configured apt repos. To make this work, you need to download the packages from the release and add them to a locally configured repo. Due to version restrictions, it will not install from the release repos.
 
 `podman_storage_rootless`: Locations where podman will store
 containers when running rootless. This can include shell variables

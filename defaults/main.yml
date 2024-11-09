@@ -1,8 +1,6 @@
 ---
-podman_role_tag: 'v1.6.0'
-
-netavark_package_url: "https://github.com/abergeron/podman_role/releases/download/{{ podman_role_tag }}/netavark-1.12.2.deb"
-podman_package_url: "https://github.com/abergeron/podman_role/releases/download/{{ podman_role_tag }}/podman-5.2.2.deb"
+netavark_package_url: "https://github.com/abergeron/podman_role/releases/download/build-20241108/netavark-1.13.0-0.{{ ansible_distribution_version }}.deb"
+podman_package_url: "https://github.com/abergeron/podman_role/releases/download/build-20241108/podman-5.2.5-0.{{ ansible_distribution_version }}.deb"
 
 podman_install_from_repo: false
 podman_setup_nvidia: false
