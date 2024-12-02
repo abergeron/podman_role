@@ -1,6 +1,6 @@
 ---
-netavark_package_url: "https://github.com/abergeron/podman_role/releases/download/build-20241108/netavark-1.13.0-0.{{ ansible_distribution_version }}.deb"
-podman_package_url: "https://github.com/abergeron/podman_role/releases/download/build-20241108/podman-5.2.5-0.{{ ansible_distribution_version }}.deb"
+netavark_package_url: "https://github.com/abergeron/podman_role/releases/download/build-20241126/netavark-1.13.0-0.{{ ansible_distribution_version }}.deb"
+podman_package_url: "https://github.com/abergeron/podman_role/releases/download/build-20241126/podman-5.3.1-0.{{ ansible_distribution_version }}.deb"
 
 podman_install_from_repo: false
 podman_setup_nvidia: false
@@ -27,3 +27,5 @@ podman_storage_conf:
   storage:
     driver: '"overlay"'
     rootless_storage_path: '"{{ podman_storage_rootless }}"'
+  storage.options.overlay:
+    ignore_chown_errors: "true"
